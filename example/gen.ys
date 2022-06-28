@@ -1,0 +1,7 @@
+read_verilog -formal memory.sv
+prep -top ram_single
+flatten
+memory -nordff
+techmap
+abc -fast -g AND
+write_aiger -ascii -symbols memory1x1.aag
