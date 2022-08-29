@@ -7,11 +7,10 @@
 // operation is performed.
 // dataOut gives the first element of the queue unless the buffer is empty,
 // in which case its value is arbitrary.
-module rbFIFO(rst,clock,dataIn,push,pop,dataOut,full,empty);
+module rbFIFO(clock,dataIn,push,pop,dataOut,full,empty);
     parameter	    MSBD = 1;
     parameter	    LAST = 3;
     parameter	    MSBA = 1;
-    input	    rst;
     input	    clock;
     input [MSBD:0]  dataIn;
     input	    push;
@@ -35,15 +34,7 @@ module rbFIFO(rst,clock,dataIn,push,pop,dataOut,full,empty);
     end // initial begin
 
     always @ (posedge clock) begin
-    if (rst) begin
-            for (i = 0; i <= LAST; i = i + 1)
-                mem[i] = 0;
-            head = 0;
-            tail = 0;
-            empty = 1;
-            full=0;
-        end
-	else if (push & ~full) begin
+    if (push & ~full) begin
 	    mem[head] = dataIn;
 	    head = head + 1;
 	    empty = 0;
