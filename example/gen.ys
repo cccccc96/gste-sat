@@ -6,4 +6,4 @@ setundef -undriven -init -expose
 delete -output
 techmap
 abc -fast -g AND
-write_aiger -ascii -symbols rbFIFO-1-3-1_NoOutput.aag
+write_aiger -ascii -symbols rbFIFO-3-15-3_NoOutput.aag

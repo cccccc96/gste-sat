@@ -8,9 +8,9 @@
 // dataOut gives the first element of the queue unless the buffer is empty,
 // in which case its value is arbitrary.
 module rbFIFO(rst,clock,dataIn,push,pop,dataOut,full,empty);
-    parameter	    MSBD = 1;
-    parameter	    LAST = 3;
-    parameter	    MSBA = 1;
+    parameter	    MSBD = 3;
+    parameter	    LAST = 15;
+    parameter	    MSBA = 3;
     input	    rst;
     input	    clock;
     input [MSBD:0]  dataIn;

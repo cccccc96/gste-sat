@@ -30,7 +30,6 @@ def is_sat(f):
     solver = Solver()
     solver.add(f)
     if solver.check() == sat:
-        # print('两者不同',f)
         # print(solver.model())
         return True
     else:
@@ -39,7 +38,7 @@ def is_sat(f):
 def next_var(v):
     """Returns the 'next' of the given variable"""
     name = str(v)
-    return Bool("next(%s)" % name)
+    return Bool("%s_" % name)
 
 
 def at_time(v, t):
@@ -49,6 +48,7 @@ def at_time(v, t):
 
 
 class TransitionSystem(object):
-    def __init__(self, variables, trans):
+    def __init__(self, variables, trans, regs):
         self.variables = variables
         self.trans = trans
+        self.regs = regs

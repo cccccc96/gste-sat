@@ -34,12 +34,15 @@ def parseAiger(filename):
     out_map = {out: store[gate] for out, gate in aig.node_map.items()} #out
 
     variables = []
+    regs = []
     for input_signal_name in aig.inputs:
         variables.append(Bool(input_signal_name))
-    for out_signal_name, gate in latch_map.items():
+    for out_signal_name, gate in aig.node_map.items():
         variables.append(Bool(out_signal_name))
+        regs.append(Bool(out_signal_name))
     for latch_singal_name, gate in latch_map.items():
         variables.append(Bool(latch_singal_name))
+        regs.append(Bool(latch_singal_name))
 
     for variable in variables:
         variable_name = str(variable)
@@ -76,7 +79,7 @@ def parseAiger(filename):
         trans_list.append(tran)
     trans = And(trans_list)
 
-    return TransitionSystem(variables,trans)
+    return TransitionSystem(variables,trans,regs)
 
 
 
