@@ -1,7 +1,0 @@
-full_ ==
-Not(And(Not(And(Not(tail[1]),
-                Not(And(Not(And(mem[1][0], tail[0])),
-                        Not(And(mem[0][0], Not(tail[0]))))))),
-        Not(And(tail[1],
-                Not(And(Not(And(mem[3][0], tail[0])),
-                        Not(And(mem[2][0], Not(tail[0])))))))))

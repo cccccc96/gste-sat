@@ -30,7 +30,7 @@ def is_sat(f):
     solver = Solver()
     solver.add(f)
     if solver.check() == sat:
-        # print(solver.model())
+        print(solver.model())
         return True
     else:
         return False

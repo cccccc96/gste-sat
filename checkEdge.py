@@ -56,9 +56,11 @@ class CheckEdge:
         return mu
 
     def match(self, cur_state, cons, edge):
-        f = Not(Implies(cur_state,cons))
+        f = Not(
+            Implies(cur_state, cons)
+        )
         if is_sat(f):
-            print('not match',edge,cons)
+            print('not match',edge)
             return False
         print('match',edge)
         return True
@@ -86,8 +88,10 @@ class CheckEdge:
                 )
             )
             simpl = Tactic("simplify")
-            eliminator = Tactic("qe2")
-            t = Then(simpl, eliminator, simpl)
+            # eliminator = Tactic("qe2")
+            # t = Then(simpl, eliminator, simpl)
+            t = Then(simpl,simpl)
+
             cur_state = t(cur_state).as_expr()
             # if edge == (6,4):
             #     print(edge)
