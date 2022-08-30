@@ -90,14 +90,8 @@ def runCheckEdge():
     filename = './example/rbFIFO-3-15-3.aag'
     transitionSystem = parseAiger(filename)
     trajAssertion = FIFO_TrajAssertion(15)
-    list = (PLUSN('head', 3).sumList())
-    for i in range(len(list)):
-        print('sum[%d]: '%i)
-        print(list[i])
-        print()
-
-    # check = CheckEdge(transitionSystem, trajAssertion)
-    # check.run()
+    check = CheckEdge(transitionSystem, trajAssertion)
+    check.run()
 
 runCheckEdge()
 
