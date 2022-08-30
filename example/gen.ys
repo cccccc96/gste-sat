@@ -2,6 +2,7 @@ read_verilog -formal rbFIFO.sv
 prep -top rbFIFO
 flatten
 memory -nordff
+setundef -undriven -init -expose
 delete -output
 techmap
 abc -fast -g AND

@@ -1,6 +1,6 @@
 // Ring buffer FIFO.
-// head points to the insertion point unless the buffer is full.
-// tail points to the first element in the queue unless the buffer is empty.
+// tail points to the insertion point unless the buffer is full.
+// head points to the first element in the queue unless the buffer is empty.
 // A push on a full buffer is a NOOP.
 // A pop from an empty buffer is a NOOP.
 // If both push and pop are asserted at the same clock cycle, only the push
@@ -20,34 +20,34 @@ module rbFIFO(clock,dataIn,push,pop,dataOut,full,empty);
     output	    empty;
 
     reg [MSBD:0]    mem[0:LAST];
-    reg [MSBA:0]    head;
     reg [MSBA:0]    tail;
+    reg [MSBA:0]    head;
     reg		    empty;
     integer	    i;
 
     initial begin
 	for (i = 0; i <= LAST; i = i + 1)
 	    mem[i] = 0;
-	head = 0;
 	tail = 0;
+	head = 0;
 	empty = 1;
     end // initial begin
 
     always @ (posedge clock) begin
     if (push & ~full) begin
-	    mem[head] = dataIn;
-	    head = head + 1;
+	    mem[tail] = dataIn;
+	    tail = tail + 1;
 	    empty = 0;
 	end // if (push & ~full)
 	else if (pop & ~empty) begin
-	    tail = tail + 1;
-	    if (tail == head)
+	    head = head + 1;
+	    if (head == tail)
 		empty = 1;
 	end // if (pop & ~empty)
     end // always @ (posedge clock)
 
-    assign dataOut = mem[tail];
+    assign dataOut = mem[head];
 
-    assign full = (tail == head) & ~empty;
+    assign full = (head == tail) & ~empty;
 
 endmodule // rbFIFO
